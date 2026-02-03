@@ -1,0 +1,87 @@
+# Cloudflare Workers Configuration
+# Tap2 GamePay - Ultra-low latency payment processing
+
+name = "tap2-gamepay"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Account configuration (set via environment or login)
+# account_id = "your-account-id"
+
+# Workers configuration
+workers_dev = true
+route = { pattern = "api.tap2.dev/*", zone_name = "tap2.dev" }
+
+# D1 Database Bindings
+[[d1_databases]]
+binding = "DB"
+database_name = "tap2-gamepay-db"
+database_id = "local" # Set to actual DB ID after creation
+
+# KV Namespace Bindings
+[[kv_namespaces]]
+binding = "CACHE"
+id = "local" # Set to actual KV ID after creation
+preview_id = "local"
+
+# R2 Storage (for receipts and documents)
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "tap2-gamepay-storage"
+
+# Environment Variables
+[vars]
+ENVIRONMENT = "development"
+LOG_LEVEL = "info"
+API_VERSION = "v1"
+
+# Secret Environment Variables (use wrangler secret to set)
+# - JWT_SECRET
+# - STRIPE_SECRET_KEY
+# - STRIPE_WEBHOOK_SECRET
+# - ENCRYPTION_KEY
+
+# Production Environment
+[env.production]
+name = "tap2-gamepay-prod"
+workers_dev = false
+route = { pattern = "api.tap2.com/*", zone_name = "tap2.com" }
+
+[env.production.vars]
+ENVIRONMENT = "production"
+LOG_LEVEL = "warn"
+
+# Staging Environment
+[env.staging]
+name = "tap2-gamepay-staging"
+workers_dev = true
+route = { pattern = "api-staging.tap2.dev/*", zone_name = "tap2.dev" }
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+LOG_LEVEL = "debug"
+
+# Build configuration
+[build]
+command = "npm run build"
+watch_dirs = ["src"]
+
+# Rules for including assets
+[rules]
+[[rules.type = "ESModule"]]
+globs = ["**/*.ts", "**/*.tsx"]
+
+# Limits (increase as needed)
+[limits]
+cpu_ms = 50
+
+# Analytics
+[analytics]
+enabled = true
+
+# Usage Model (controls limits and pricing)
+# usage_model = "bundled"  # or "unbound"
+
+# Placement (for low latency)
+# placement = { mode = "smart" }  # or "advanced"

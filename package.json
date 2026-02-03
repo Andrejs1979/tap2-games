@@ -1,0 +1,46 @@
+{
+  "name": "tap2-gamepay",
+  "version": "0.1.0",
+  "description": "Ultra-low latency payment platform for gaming",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy --env production",
+    "tail": "wrangler tail",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "build": "tsc",
+    "lint": "eslint src",
+    "format": "prettier --write src",
+    "typecheck": "tsc --noEmit",
+    "db:create": "wrangler d1 create tap2-gamepay-db",
+    "db:migrate": "wrangler d1 migrations apply tap2-gamepay-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply tap2-gamepay-db",
+    "kv:create": "wrangler kv:namespace create CACHE",
+    "kv:preview": "wrangler kv:namespace create CACHE --preview"
+  },
+  "keywords": [
+    "payments",
+    "gaming",
+    "cloudflare",
+    "workers"
+  ],
+  "author": "Tap2 <team@tap2.com>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250204.0",
+    "@types/node": "^22.13.1",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.5",
+    "wrangler": "^4.7.0"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20250204.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
