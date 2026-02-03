@@ -4,8 +4,6 @@
  * Ultra-low latency payment processing for gaming
  */
 
-import { RequestContext } from './context';
-
 export interface Env {
   DB: D1Database;
   CACHE: KVNamespace;
@@ -99,7 +97,7 @@ function jsonResponse(data: unknown, status = 200): Response {
   });
 }
 
-export class RequestContext {
+class RequestContext {
   constructor(
     public request: Request,
     public env: Env,
