@@ -1,0 +1,76 @@
+# Cloudflare Workers Configuration
+# Tap2 GamePay - Ultra-low latency gaming payment platform
+
+name = "tap2-gamepay"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Account configuration
+# account_id = "" # Set via CLOUDFLARE_ACCOUNT_ID environment variable
+
+# Environment-specific configuration
+[env.development]
+name = "tap2-gamepay-dev"
+
+[env.staging]
+name = "tap2-gamepay-staging"
+
+[env.production]
+name = "tap2-gamepay"
+routes = [
+  { pattern = "api.tap2.gamepay.com/*", zone_name = "tap2.gamepay.com" }
+]
+
+# D1 Database (SQLite at the edge)
+[[d1_databases]]
+binding = "DB"
+database_name = "tap2-gamepay-db"
+database_id = "" # Set via CLOUDFLARE_D1_DATABASE_ID environment variable
+
+# KV Namespace (low-latency cache)
+[[kv_namespaces]]
+binding = "CACHE"
+id = "" # Set via CLOUDFLARE_KV_NAMESPACE_ID environment variable
+
+# R2 Storage (receipts, audit logs)
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "tap2-gamepay-storage"
+
+# Variables (secrets via wrangler secret)
+[vars]
+ENVIRONMENT = "development"
+LOG_LEVEL = "info"
+
+# Secrets (use `wrangler secret put <SECRET_NAME>`)
+# - API_KEYS (JSON array of valid API keys)
+# - STRIPE_SECRET_KEY
+# - STRIPE_WEBHOOK_SECRET
+# - JWT_SECRET
+# - WEBHOOK_SIGNING_SECRET
+
+# Limits and timeouts
+[limits]
+# CPU time limit (ms)
+cpu_ms = 50
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "."
+watch_paths = ["src/**/*.ts"]
+
+# Site deployment (for marketing site)
+[site]
+bucket = "./marketing/dist"
+entry-point = "."
+
+# Observability
+[triggers.crons]
+# Analytics aggregation (every hour)
+"0 * * * *" = "src/jobs/analytics.ts"
+
+# Sentry integration
+[placement]
+mode = "smart"
