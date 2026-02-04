@@ -1,0 +1,517 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Tap2 GamePay - Ultra-Low Latency Gaming Payments">
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">Tap2 GamePay</h1>
+        <p class="hero-tagline">Gaming payments that don't interrupt gameplay</p>
+        <p class="hero-subtitle">
+          Sub-100ms payment processing with gaming-specific fraud protection.
+          Keep 25% more revenue compared to app stores.
+        </p>
+        <div class="hero-cta">
+          <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
+          <a href="/about" class="btn btn-secondary">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title">Why Game Studios Choose Tap2</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Ultra-Low Latency</h3>
+            <p>Sub-100ms payment processing that never interrupts gameplay. Async confirmation means players get items instantly.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Keep 25% More Revenue</h3>
+            <p>5% platform fee vs 30% on app stores. Save millions on payment processing while providing better player experience.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <h3>Gaming-Specific Fraud Protection</h3>
+            <p>ML models trained on gaming data detect chargebacks, account takeovers, and refund abuse with 99.5% accuracy.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">👛</div>
+            <h3>Virtual Wallets</h3>
+            <p>Multi-currency wallet management for real and virtual currencies. Built-in spending analytics for your in-game economy.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🔧</div>
+            <h3>Easy SDK Integration</h3>
+            <p>Native SDKs for Unity, Unreal, and Web. Get started in minutes, not weeks. Full API coverage with async patterns.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h3>Esports Ready</h3>
+            <p>Tournament prize pools, bulk payouts, and team wallets. Built-in sponsor integration and tax document generation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+      <div class="container">
+        <h2 class="section-title">Built for Gaming, Not Generic Commerce</h2>
+        <div class="benefits-content">
+          <div class="benefit-item">
+            <h3>🎯 Purpose-Built for Games</h3>
+            <p>Unlike PayPal or Stripe, we understand virtual items, in-game currencies, and the unique patterns of gaming transactions.</p>
+          </div>
+          <div class="benefit-item">
+            <h3>🚀 Edge Processing</h3>
+            <p>Deployed on Cloudflare's global edge network. Your players get low latency whether they're in London, Tokyo, or São Paulo.</p>
+          </div>
+          <div class="benefit-item">
+            <h3>🛡️ Chargeback Prevention</h3>
+            <p>Gaming-specific risk signals detect fraud before it happens. Stop losing revenue to friendly fraud and serial refunders.</p>
+          </div>
+          <div class="benefit-item">
+            <h3>👪 Parental Controls</h3>
+            <p>Built-in spending limits and COPPA compliance for younger players. Give parents peace of mind while maximizing monetization.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="audience">
+      <div class="container">
+        <h2 class="section-title">Trusted by Game Studios</h2>
+        <p class="section-subtitle">From indie developers to AAA studios, Tap2 powers payments for:</p>
+        <div class="audience-grid">
+          <div class="audience-item">
+            <h3>🎮 PC & Console Games</h3>
+            <p>Unity and Unreal SDKs with native performance. In-game purchases, battle passes, and virtual item stores.</p>
+          </div>
+          <div class="audience-item">
+            <h3>🌐 Web Games</h3>
+            <p>JavaScript/TypeScript SDK with React hooks. Perfect for browser games and WebGL applications.</p>
+          </div>
+          <div class="audience-item">
+            <h3>📱 Mobile Games</h3>
+            <p>Alternative to Apple/Google IAP with 6x lower fees. Web-to-mobile payment flows that bypass store restrictions.</p>
+          </div>
+          <div class="audience-item">
+            <h3>🏆 Esports Platforms</h3>
+            <p>Tournament payouts, prize pool management, and team wallets. Bulk payouts for hundreds of winners at once.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waitlist Form -->
+    <section id="waitlist" class="waitlist">
+      <div class="container">
+        <h2 class="section-title">Get Early Access</h2>
+        <p class="section-subtitle">Join the waitlist for Tap2 GamePay and be among the first to experience ultra-low latency gaming payments.</p>
+
+        <form id="waitlist-form" class="waitlist-form">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="you@studio.com"
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-message" id="form-message"></div>
+
+          <button type="submit" class="btn btn-primary btn-large" id="submit-btn">
+            Join Waitlist
+          </button>
+        </form>
+
+        <p class="waitlist-note">
+          We'll contact you when early access slots open. No spam, ever.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  const form = document.getElementById('waitlist-form') as HTMLFormElement;
+  const emailInput = document.getElementById('email') as HTMLInputElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const messageEl = document.getElementById('form-message') as HTMLDivElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = emailInput.value;
+
+    // Disable form
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    messageEl.className = 'form-message';
+    messageEl.textContent = '';
+
+    try {
+      const response = await fetch('https://api.claude-remote.com/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          projectRepo: 'github.com/Andrejs1979/tap2-games',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        messageEl.textContent = '🎉 You\'re on the list! We\'ll be in touch soon.';
+        messageEl.className = 'form-message success';
+        form.reset();
+      } else {
+        messageEl.textContent = data.error || 'Something went wrong. Please try again.';
+        messageEl.className = 'form-message error';
+      }
+    } catch (error) {
+      messageEl.textContent = 'Network error. Please check your connection and try again.';
+      messageEl.className = 'form-message error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Join Waitlist';
+    }
+  });
+</script>
+
+<style>
+  /* Hero Section */
+  .hero {
+    padding: 6rem 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-tagline {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    opacity: 0.9;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    background: white;
+    color: #667eea;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+  }
+
+  /* Section Styling */
+  .features,
+  .benefits,
+  .audience,
+  .waitlist {
+    padding: 5rem 1rem;
+  }
+
+  .features {
+    background: #f8f9fa;
+  }
+
+  .benefits {
+    background: white;
+  }
+
+  .audience {
+    background: #f8f9fa;
+  }
+
+  .waitlist {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1a202c;
+  }
+
+  .waitlist .section-title {
+    color: white;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    font-size: 1.125rem;
+    color: #4a5568;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .waitlist .section-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Features Grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #1a202c;
+  }
+
+  .feature-card p {
+    color: #4a5568;
+    line-height: 1.6;
+  }
+
+  /* Benefits */
+  .benefits-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .benefit-item {
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
+  }
+
+  .benefit-item h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #1a202c;
+  }
+
+  .benefit-item p {
+    font-size: 1.125rem;
+    color: #4a5568;
+    line-height: 1.7;
+  }
+
+  /* Audience Grid */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .audience-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+  }
+
+  .audience-item h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #1a202c;
+  }
+
+  .audience-item p {
+    color: #4a5568;
+    line-height: 1.6;
+  }
+
+  /* Waitlist Form */
+  .waitlist-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: white;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    transition: border-color 0.2s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: white;
+    background: white;
+  }
+
+  .form-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.9375rem;
+    text-align: center;
+  }
+
+  .form-message.success {
+    background: rgba(72, 187, 120, 0.2);
+    border: 1px solid rgba(72, 187, 120, 0.5);
+    color: white;
+  }
+
+  .form-message.error {
+    background: rgba(245, 101, 101, 0.2);
+    border: 1px solid rgba(245, 101, 101, 0.5);
+    color: white;
+  }
+
+  .waitlist-note {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .features-grid,
+    .audience-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .waitlist-form {
+      padding: 1.5rem;
+    }
+  }
+</style>
