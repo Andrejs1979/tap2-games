@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Category:** fintech
+**Category:** fintech  [was: fintech]
 
 **Product Requirements Document** **Version 1.0 | February 2026** **CONFIDENTIAL - Tap2 / CloudMind Inc.** 
 
